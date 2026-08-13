@@ -29,7 +29,7 @@
 1. 按上面的依赖安装好
 2. 双击 `text2img.ahk` 常驻托盘（复制到「启动」文件夹可开机自启）
 3. 复制任意文字
-4. 按 `Ctrl+Shift+C`（与 Ditto 的 `Ctrl+Shift+V` 打开剪贴板对应成对）
+4. 按 `Ctrl+Shift+C`
 5. 到微信 / QQ / 文档里 Ctrl+V 粘贴即可
 
 调试可用：`python text2img.py --save`（同时保存 out.png 到本目录）
