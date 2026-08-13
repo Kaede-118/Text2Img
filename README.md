@@ -10,17 +10,27 @@
 | `text2img.ahk` | AHK 热键脚本（v2 语法），全局热键 `Ctrl+Shift+C` |
 | `config.json` | 样式配置（首次运行自动生成） |
 
+## 依赖
+
+- **Python 3** + pip：
+
+  ```bash
+  pip install pillow pywin32 fonttools freetype-py
+  ```
+
+- **AutoHotkey v2**（运行 `text2img.ahk` 需要，安装后双击 .ahk 即常驻托盘）：
+
+  ```bash
+  winget install AutoHotkey.AutoHotkey
+  ```
+
 ## 使用
 
-1. 安装依赖（一次性）：
-
-   ```bash
-   pip install pillow pywin32
-   ```
-
-2. 复制任意文字
-3. 按 `Ctrl+Shift+C`（需先运行 `text2img.ahk` 常驻托盘；与 Ditto 的 `Ctrl+Shift+V` 打开剪贴板对应成对）
-4. 到微信 / QQ / 文档里 Ctrl+V 粘贴即可
+1. 按上面的依赖安装好
+2. 双击 `text2img.ahk` 常驻托盘（复制到「启动」文件夹可开机自启）
+3. 复制任意文字
+4. 按 `Ctrl+Shift+C`（与 Ditto 的 `Ctrl+Shift+V` 打开剪贴板对应成对）
+5. 到微信 / QQ / 文档里 Ctrl+V 粘贴即可
 
 调试可用：`python text2img.py --save`（同时保存 out.png 到本目录）
 
@@ -36,10 +46,10 @@
 | `title_scale` | 标题字号倍数（相对正文） |
 | `font_size` | 正文字号 px |
 | `line_spacing` | 行距倍数 |
-| `font_path` | 字体文件（默认微软雅黑） |
+| `font_path` | 主字体文件（默认微软雅黑） |
+| `fallback_fonts` | 回退字体列表（主字体缺字形时按序补绘） |
+| `emoji_font_path` | 彩色 emoji 字体（默认 Segoe UI Emoji，FreeType COLR 渲染） |
 
 ## 改热键
 
 编辑 `text2img.ahk` 里的 `^+c`（`^`=Ctrl，`!`=Alt，`+`=Shift，`#`=Win），改完重新加载脚本（托盘右键 → Reload）。
-
-> 注意：若你用的是 AutoHotkey v1，请告诉我，我把脚本改成 v1 语法。
