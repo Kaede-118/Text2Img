@@ -206,9 +206,11 @@ class FontGroup:
         return total
 
     def _unit_width(self, unit, seg):
-        """单个渲染单元内一段文本的宽度：emoji 按字号方宽，字体按实际字形宽"""
+        """单个渲染单元内一段文本的宽度：
+        emoji 用实际渲染宽度（与 draw 一致，避免宽字形与后续文字重叠）；
+        字体按实际字形宽"""
         if unit[0] == "emoji":
-            return self.size * len(seg)
+            return sum(self.emoji.get(c).width for c in seg)
         return unit[1].getlength(seg)
 
     def draw(self, img, draw, xy, text, fill, line_height):
@@ -234,7 +236,7 @@ class FontGroup:
                 # RGB 画布用源图 alpha 通道作 mask 合成（alpha_composite 要求双 RGBA）
                 y_off = y + max(0, (line_height - emoji_img.height) // 2)
                 img.paste(emoji_img, (int(x), y_off), emoji_img)
-                x += self.size
+                x += emoji_img.width  # 按实际宽度前进，宽字形不重叠
             i = j
 
 
