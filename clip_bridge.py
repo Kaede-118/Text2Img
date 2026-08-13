@@ -69,12 +69,15 @@ def main():
     if not dib:
         return
 
-    # 3. CF_DIB → PIL 图像（补 14 字节 BMP 文件头），存 PNG 到 temp
+    # 3. CF_DIB → PIL 图像（补 BMP 文件头），存 PNG 到 temp
+    # 像素偏移 = 14(文件头) + BITMAPINFOHEADER 大小(读 dib 前 4 字节)；
+    # 写错偏移会把 infoheader 当像素解析，导致通道错乱（R/B 互换）
+    bi_size = struct.unpack("<I", dib[0:4])[0]
     bmp = (
         b"BM"
         + (14 + len(dib)).to_bytes(4, "little")
         + b"\x00\x00\x00\x00"
-        + (14).to_bytes(4, "little")
+        + (14 + bi_size).to_bytes(4, "little")
         + dib
     )
     try:

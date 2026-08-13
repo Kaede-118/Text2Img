@@ -7,3 +7,4 @@ config.json
 
 # 调试产物
 out.png
+crop_*.png
