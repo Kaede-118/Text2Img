@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# 本地配置（含绝对路径字体配置，脚本首次运行自动生成默认模板）
+config.json
+
+# 调试产物
+out.png
