@@ -11,7 +11,7 @@
 
 ; ---------- 功能 1: Ctrl+Shift+C 文字转长图 ----------
 ; Hide 选项：python 控制台窗口不可见，不打扰操作
-^+c::Run('python "C:\Desktop\Text2Img\text2img.py"', , 'Hide')
+#c::Run('python "' A_ScriptDir '\text2img.py"', , 'Hide')
 
 ; ---------- 功能 2: 剪贴板图片桥接 ----------
 ; 监听剪贴板变化：Type=2 表示含图片或文件
@@ -24,5 +24,5 @@ ClipChanged(Type) {
 }
 
 DoBridge() {
-    Run('python "C:\Desktop\Text2Img\clip_bridge.py"', , 'Hide')
+    Run('python "' A_ScriptDir '\clip_bridge.py"', , 'Hide')
 }
